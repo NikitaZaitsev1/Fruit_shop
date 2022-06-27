@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block hero_area %}
+<div class="hero_area">
+    {% include "base_parts/nav.html" %}
+    {% include "home_parts/1_slider_section.html" %}
+</div>
+{% endblock hero_area %}
+
+{% block content %}
+{% include "home_parts/2_sevice_section.html" %}
+{% include "home_parts/3_fruits_section.html" %}
+{% include "home_parts/4_tasty_section.html" %}
+{% include "home_parts/6_contact_section.html" %}
+{% include "home_parts/7_map_section.html" %}
+{% endblock content %}

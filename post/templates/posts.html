@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load post_lib %}
+
+{% block hero_area %}
+{% include "base_parts/nav.html" %}
+{% endblock hero_area %}
+
+
+{% block content %}
+<section class="fruit_section">
+    <div class="container">
+        <h2 class="custom_heading">Posts</h2>
+        <p class="custom_heading-text">
+            There are many variations of passages of Lorem Ipsum available, but
+            the majority have
+        </p>
+        {% for post in posts %}
+        <div class="row layout_padding2">
+            <div class="col-md-8">
+                <div class="fruit_detail-box">
+                    <h3>
+                        {{ post.title }}
+                    </h3>
+                    <div>{{ post.published_date }} by {{ post.author }}</div>
+                    <p class="mt-4 mb-1 text-justify">
+                        {{ post.text|truncatewords:60 }}
+                    </p>
+                    <p>
+                        {% for tag in post.tag.all %}
+                        <a href="{% url 'tag_detail_page' pk=tag.pk %}" style="color: orangered">{{ tag }}</a>
+                        {% endfor %}
+                    </p>
+                    <div class="quote_btn-container mt-5 ">
+                        <a href="{% url 'post_detail_page' pk=post.pk %}">
+                            Read more
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <div class="fruit_img-box d-flex justify-content-center align-items-center">
+                    <img src="{{ post.photo.url }}" alt="" class="" width="350px"/>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="text-center p-md-5">
+            {% if page_obj.has_previous %}
+            <a href="{% url 'post_list_page' %}?page=1" class="title-section" style="color: black">First</a>
+            <a href="{% url 'post_list_page' %}?page={{ page_obj.previous_page_number }}"
+               class="title-section" style="color: black">Previos</a>
+            {% endif %}
+            {% for num_page in page_obj.paginator.num_pages|range:0 %}
+            <a href="{% url 'post_list_page' %}?page={{ num_page|add:1 }}"
+               class="title-section" style="color: black">{{ num_page|add:1 }}</a>
+            {% endfor %}
+            {% if page_obj.has_next %}
+            <a href="{% url 'post_list_page' %}?page={{ page_obj.next_page_number }}"
+               class="title-section" style="color: black">Next</a>
+            <a href="{% url 'post_list_page' %}?page={{ page_obj.paginator.num_pages }}"
+               class="title-section" style="color: black">Last</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+{% block footer %}
+<!--<style>-->
+<!--    footer {-->
+<!--        margin-top: 185px;-->
+<!--        height: 100px;-->
+<!--    }-->
+
+<!--    .login {-->
+<!--        margin-top: 40px;-->
+<!--    }-->
+<!--</style>-->
+
+
+<footer>
+    {% include "base_parts/footer.html" %}
+</footer>
+{% endblock footer %}

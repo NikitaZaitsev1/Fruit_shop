@@ -1,0 +1,37 @@
+{% load static %}
+<section class="contact_section layout_padding">
+    <div class="container">
+        <h2 class="font-weight-bold">
+            Contact Us
+        </h2>
+        <div class="row">
+            <div class="col-md-8 mr-auto">
+                <form action="POST">
+                    <div class="contact_form-container">
+                        <div>
+                            <div>
+                                <input type="text" name="full_name" placeholder="Name">
+                            </div>
+                            <div>
+                                <input type="text" name="phone" placeholder="Phone Number">
+                            </div>
+                            <div>
+                                <input type="email" name="email" placeholder="Email">
+                            </div>
+
+                            <div class="mt-5">
+                                <input type="text"  name="message" placeholder="Message">
+                            </div>
+                            <div class="mt-5">
+                                <button type="submit">
+                                    send
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

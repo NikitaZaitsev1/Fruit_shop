@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load post_lib %}
+
+{% block hero_area %}
+{% include "base_parts/nav.html" %}
+{% endblock hero_area %}
+
+
+{% block content %}
+<section class="fruit_section">
+    <div class="container">
+        <h2 class="custom_heading">Posts with   <a href="{% url 'tag_detail_page' pk=tag.pk %}" style="color: orangered">{{ tag.name }}</a></h2>
+        {% for post in tag.posts.all %}
+        <div class="row layout_padding2">
+            <div class="col-md-8">
+                <div class="fruit_detail-box">
+                    <h3>
+                        {{ post.title }}
+                    </h3>
+                    <div>{{ post.published_date }} by {{ post.author }}</div>
+                    <p class="mt-4 mb-1 text-justify">
+                        {{ post.text|truncatewords:60 }}
+                    </p>
+                    <div class="quote_btn-container mt-5 ">
+                        <a href="{% url 'post_detail_page' pk=post.pk %}">
+                            Read more
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <div class="fruit_img-box d-flex justify-content-center align-items-center">
+                    <img src="{{ post.photo.url }}" alt="" class="" width="350px"/>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock content %}
+
+{% block footer %}
+<!--<style>-->
+<!--    footer {-->
+<!--        margin-top: 185px;-->
+<!--        height: 100px;-->
+<!--    }-->
+
+<!--    .login {-->
+<!--        margin-top: 40px;-->
+<!--    }-->
+<!--</style>-->
+
+
+<footer>
+    {% include "base_parts/footer.html" %}
+</footer>
+{% endblock footer %}

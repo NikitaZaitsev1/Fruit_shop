@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block hero_area %}
+{% include "base_parts/nav.html" %}
+{% endblock hero_area %}
+
+{% block content %}
+<style>
+    section {
+        padding: 30px;
+    }
+
+    h2 {
+        padding: 20px;
+    }
+
+    p {
+        padding: 10px;
+    }
+</style>
+<section class="fruit_section">
+    <div class="container">
+        <h2 class="custom_heading">We are an awesome team of trying to make a change</h2>
+        <p class="custom_heading-text">
+            Officially established in 1999, NGK has a long history that dates back to the 1920s. Our experience and
+            heritage within the fruit industry in India is second to none. Keeping our roots intact, we represent the
+            same passion for quality, service and values that we were built on. Today, NGK imports fresh, wholesome and
+            high quality fruits straight from the orchards of the farthest corners of the world.
+        </p>
+        <p class="custom_heading-text">
+            Whether you are looking for deliciously sweet grapes that are as delectable as when they were picked,
+            gloriously crunchy apples that your customers will want to savour again and again, or the exotic sweetness
+            of Costa Rican yellow pitahayas, Fresh Fruits is your supplier of choice.
+        </p>
+        <p class="custom_heading-text">
+            We have a vast distribution network comprising of highly dedicated professionals coupled with strong
+            logistics support, establishing a nationwide reach. Our scale of operation ensures that the fruits we supply
+            ends up in millions of fruit bowls across the country.
+        </p>
+        <p class="custom_heading-text">
+            We facilitate our customers with the farm-fresh quality products. You never deliver stale or contaminated
+            food to them.
+        </p>
+        <p class="custom_heading-text">
+            We offer you fresh fruits and vegetables which are sourced from organic farms so that you can lead a
+            healthier life.
+        </p>
+        <p class="custom_heading-text">
+            <img src="{% static 'images/orange.png' %}" alt="" width="300px"/>
+        </p>
+    </div>
+</section>
+{% endblock content %}
+
+{% block footer %}
+<style>
+    footer {
+        margin-top: 20px;
+        /*Минус Высота футера*/
+        height: 100px;
+        /*Высота футера*/
+    }
+</style>
+
+
+<footer>
+    {% include "base_parts/footer.html" %}
+</footer>
+{% endblock footer %}

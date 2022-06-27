@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block hero_area %}
+{% include "base_parts/nav.html" %}
+{% endblock hero_area %}
+
+{% block content %}
+
+<section class="contact_section layout_padding">
+    <div class="container">
+        <h2 class="font-weight-bold">
+            Create new account
+        </h2>
+        <div class="row signup">
+            <div class="col-md-8 mr-auto">
+                <form action="{% url 'signup_page' %}" method="post" autocomplete="off">
+                    {% csrf_token %}
+                    {% for input in form %}
+                    <div class="form-group">
+                        <label for="{{ input.name }}" class="col-form-label">{{ input.label }}</label>
+                        {{ input }}
+                        {% if input.errors %}
+                        <ul>
+                            {% for error in input.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    <input type="submit" value="Create account" class="btn btn-dark" style="color: orange">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+
+{% block footer %}
+<style>
+    footer {
+        margin-top: 15px;
+        height: 100px;
+
+    }
+        .signup {
+    margin-top: 40px;
+}
+</style>
+
+
+<footer>
+    {% include "base_parts/footer.html" %}
+</footer>
+{% endblock footer %}
+

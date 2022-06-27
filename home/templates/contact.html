@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block hero_area %}
+{% include "base_parts/nav.html" %}
+{% endblock hero_area %}
+
+{% block content %}
+
+<section class="contact_section layout_padding">
+    <div class="container">
+        <h2 class="font-weight-bold">
+            Contact Us
+        </h2>
+        <div class="row">
+            <div class="col-md-8 mr-auto">
+                <form method="POST">
+                    {% csrf_token %}
+                    {% for input in feedback_form %}
+                    <div class="contact_form-container">
+                        <div>
+                            <div>
+                                <input type="text" name="{{input.name}}" placeholder="{{input.label}}">
+                            </div>
+                            {% endfor %}
+                            <div class="mt-5">
+                                <button type="submit">
+                                    send
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+
+{% block footer %}
+<style>
+    footer {
+        margin-top: 212px;
+        /*Минус Высота футера*/
+        height: 100px;
+        /*Высота футера*/
+    }
+</style>
+
+
+<footer>
+    {% include "base_parts/footer.html" %}
+</footer>
+{% endblock footer %}
+
+<style>
+    footer {
+        margin-top: 250px;
+        /*Минус Высота футера*/
+        height: 100px;
+        /*Высота футера*/
+    }
+</style>

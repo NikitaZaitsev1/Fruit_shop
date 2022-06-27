@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block hero_area %}
+{% include "base_parts/nav.html" %}
+{% endblock hero_area %}
+
+
+{% block content %}
+<section class="fruit_section">
+    <div class="container">
+        <div class="row layout_padding2">
+            <div class="col-md-8">
+                <div class="fruit_detail-box">
+                    <h3>
+                        {{ post.title }}
+                    </h3>
+                    <div>{{ post.published_date }} by {{ post.author }}</div>
+                    <p class="mt-4 mb-1 text-justify">
+                        {{ post.text|linebreaksbr }}
+                    </p>
+                    <p>
+                        {% for tag in post.tag.all %}
+                        <a href="" style="color: orangered">{{ tag }}</a>
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="fruit_img-box">
+                    <img src="{{ post.photo.url }}" alt="" class="" width="350px"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+
+{% block footer %}
+<!--<style>-->
+<!--    footer {-->
+<!--        margin-top: 185px;-->
+<!--        height: 100px;-->
+<!--    }-->
+
+<!--    .login {-->
+<!--        margin-top: 40px;-->
+<!--    }-->
+<!--</style>-->
+
+
+<footer>
+    {% include "base_parts/footer.html" %}
+</footer>
+{% endblock footer %}
+
