@@ -20,7 +20,7 @@
                     </p>
                     <p>
                         {% for tag in post.tag.all %}
-                        <a href="" style="color: orangered">{{ tag }}</a>
+                        <a href="{% url 'tag_detail_page' pk=tag.pk %}" style="color: orangered">{{ tag.name }}</a>
                         {% endfor %}
                     </p>
                 </div>

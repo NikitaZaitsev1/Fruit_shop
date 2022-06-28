@@ -1,7 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from django.views.generic import ListView, DetailView
+from django.views import View
+from django.views.generic import ListView, DetailView, CreateView
 
+from post.forms import PostForm
 from post.models import Post, Tag
 
 
@@ -22,12 +24,21 @@ class PostDetailView(DetailView):
     context_object_name = 'post'
 
 
-# class TagDetailView(ListView):
-#     model = Tag
-#     template_name = 'tag_detail.html'
-#     pk_url_kwarg = 'pk'
-#     context_object_name = 'tag'
-
 def tag_detail_view(request, pk):
     tag = get_object_or_404(Tag, pk=pk)
     return render(request, 'tag_detail.html', context={'tag': tag})
+
+
+def post_new_view(request):
+    if request.method == "POST":
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            form.save_m2m()
+            return redirect('post_detail_page', pk=post.pk)
+    else:
+        post_form = PostForm()
+        return render(request, 'post_new.html', {'post_form': post_form})

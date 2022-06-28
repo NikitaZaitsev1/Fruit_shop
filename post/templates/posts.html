@@ -28,7 +28,7 @@
                     </p>
                     <p>
                         {% for tag in post.tag.all %}
-                        <a href="{% url 'tag_detail_page' pk=tag.pk %}" style="color: orangered">{{ tag }}</a>
+                        <a href="{% url 'tag_detail_page' pk=tag.pk %}" style="color: orangered">{{ tag.name }}</a>
                         {% endfor %}
                     </p>
                     <div class="quote_btn-container mt-5 ">
@@ -38,9 +38,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 d-flex justify-content-center align-items-center">
-                <div class="fruit_img-box d-flex justify-content-center align-items-center">
+            <div class="col-md-4">
+                <div class="fruit_img-box">
+                    {% if post.photo %}
                     <img src="{{ post.photo.url }}" alt="" class="" width="350px"/>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -67,18 +69,6 @@
 {% endblock content %}
 
 {% block footer %}
-<!--<style>-->
-<!--    footer {-->
-<!--        margin-top: 185px;-->
-<!--        height: 100px;-->
-<!--    }-->
-
-<!--    .login {-->
-<!--        margin-top: 40px;-->
-<!--    }-->
-<!--</style>-->
-
-
 <footer>
     {% include "base_parts/footer.html" %}
 </footer>
