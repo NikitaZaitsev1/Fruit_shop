@@ -14,7 +14,12 @@
                     <h3>
                         {{ post.title }}
                     </h3>
-                    <div>{{ post.published_date }} by {{ post.author }}</div>
+                    <div>{{ post.published_date }} by {{ post.author }}
+                        {% if user.is_staff %}
+                        - <a href="{% url 'post_edit_page' post.pk %}">Edit</a>
+                        - <a href="{% url 'post_delete_page' post.pk %}">Delete</a>
+                        {% endif %}
+                    </div>
                     <p class="mt-4 mb-1 text-justify">
                         {{ post.text|linebreaksbr }}
                     </p>
@@ -27,7 +32,9 @@
             </div>
             <div class="col-md-4">
                 <div class="fruit_img-box">
+                    {% if post.photo %}
                     <img src="{{ post.photo.url }}" alt="" class="" width="350px"/>
+                    {% endif %}
                 </div>
             </div>
         </div>

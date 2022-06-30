@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load post_lib %}
+
+{% block hero_area %}
+{% include "base_parts/nav.html" %}
+{% endblock hero_area %}
+
+{% block content %}
+<section class="fruit_section">
+    <div class="container">
+        <h2 class="custom_heading">Delete post "{{ post.title }}"</h2>
+        <div class="row layout_padding2">
+            <div class="col-md-8">
+                <div class="fruit_detail-box">
+                    <div class="form-group">
+                        <form method="post" autocomplete="off"
+                              enctype="multipart/form-data" >
+                            {% csrf_token %}
+                            <strong>Are you sure?!</strong>
+                            <p class="mt-3">
+                                <button type="submit" name="buttom" class="btn btn-dark" style="color: orange">
+                                    Delete post!
+                                </button>
+                            </p>
+                        </form>
+                        <p>
+                            <strong>Or</strong>
+                        </p>
+                        <a href="{% url 'post_list_page' %}">
+                            <button type="submit" name="buttom" class="btn btn-dark" style="color: orange">
+                                Go to post page
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+
+{% block footer %}
+
+<style>
+    footer {
+        margin-top: 485px;
+        height: 100px;
+    }
+
+    .login {
+        margin-top: 40px;
+    }
+</style>
+
+
+<footer>
+    {% include "base_parts/footer.html" %}
+</footer>
+{% endblock footer %}

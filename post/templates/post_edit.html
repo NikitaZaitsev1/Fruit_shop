@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load post_lib %}
+
+{% block hero_area %}
+{% include "base_parts/nav.html" %}
+{% endblock hero_area %}
+
+{% block content %}
+<section class="fruit_section">
+    <div class="container">
+        <h2 class="custom_heading">Edit post</h2>
+        <div class="row layout_padding2">
+            <div class="col-md-8">
+                <div class="fruit_detail-box">
+                    <div class="form-group">
+                        <form action="{% url 'post_new_page' %}" method="post" autocomplete="off"
+                              enctype="multipart/form-data" style=" width: 50vw; margin-left : 9vw;">
+                            {% csrf_token %}
+                            {% for field in post_form %}
+                            <div class="form-group">
+                                {% if field.errors %}
+                                <div class="alert alert-danger">
+                                    {{ field.errors }}
+                                </div>
+                                {% endif %}
+                                {{ field.label }}
+                                {{ field }}
+                            </div>
+                            {% endfor %}
+                            <button type="submit" name="buttom" class="btn btn-dark" style="color: orange">
+                                Update
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+
+{% block footer %}
+<footer>
+    {% include "base_parts/footer.html" %}
+</footer>
+{% endblock footer %}
