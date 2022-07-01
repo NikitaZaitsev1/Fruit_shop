@@ -25,6 +25,7 @@ urlpatterns = [
     path("auth/", include("user.auth_urls")),
     path("account/", include("user.urls")),
     path("", include("post.urls")),
+    path("marketplace/", include("marketplace.urls")),
 ]
 
 if settings.DEBUG:

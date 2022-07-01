@@ -16,7 +16,6 @@ class PostListView(ListView):
     ordering = ['-published_date']
 
 
-
 class PostDetailView(DetailView):
     model = Post
     template_name = 'post_detail.html'
