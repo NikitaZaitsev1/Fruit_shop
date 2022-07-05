@@ -12,8 +12,9 @@
     <div class="container">
         <h2 class="custom_heading">Fruits</h2>
         <p class="custom_heading-text">
-            There are many variations of passages of Lorem Ipsum available, but
-            the majority have
+            {% for category in cat_menu %}
+            <a href="{% url 'cat_detail_page' category.pk %}" style="color: orangered">{{category}} | </a>
+            {% endfor %}
         </p>
         {% for product in products %}
         <div class="row layout_padding2">
@@ -23,16 +24,27 @@
                         {{ product.name }}
                     </h3>
                     <div>{{ product.published_date }} by {{ product.seller }}
+                        {% if user.is_staff %}
+                        - <a href="{% url 'product_edit_page' pk=product.pk %}" style="color: orange">Edit</a>
+                        - <a href="{% url 'product_delete_page' pk=product.pk %}" style="color: orange">Delete</a>
+                        {% endif %}
                     </div>
+                    <p>
+                        <a href="{% url 'cat_detail_page' product.category.pk %}" style="color: orangered">Category:
+                            {{ product.category }}</a>
+                    </p>
                     <p class="mt-4 mb-1 text-justify">
                         {{ product.description|truncatewords:60 }}
                     </p>
                     <p>
-                        Price: {{ product.price }} USD
+                        <strong>Price: {{ product.price }} USD</strong>
                     </p>
-                    <div class="custom_dark-btn">
-                        <a href="">
+                    <div class="quote_btn-container">
+                        <a href="#">
                             Buy now
+                        </a>
+                        <a href="{% url 'product_detail_page' pk=product.pk %}">
+                            Read more
                         </a>
                     </div>
                 </div>
@@ -40,7 +52,7 @@
             <div class="col-md-4">
                 <div class="fruit_img-box">
                     {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="" class="" width="350px"/>
+                    <img src="{{ product.image.url }}" alt="" class="" width="250px"/>
                     {% endif %}
                 </div>
             </div>
@@ -48,18 +60,18 @@
         {% endfor %}
         <div class="text-center p-md-5">
             {% if page_obj.has_previous %}
-            <a href="{% url 'post_list_page' %}?page=1" class="title-section" style="color: black">First</a>
-            <a href="{% url 'post_list_page' %}?page={{ page_obj.previous_page_number }}"
+            <a href="{% url 'product_list_page' %}?page=1" class="title-section" style="color: black">First</a>
+            <a href="{% url 'product_list_page' %}?page={{ page_obj.previous_page_number }}"
                class="title-section" style="color: black">Previos</a>
             {% endif %}
             {% for num_page in page_obj.paginator.num_pages|range:0 %}
-            <a href="{% url 'post_list_page' %}?page={{ num_page|add:1 }}"
+            <a href="{% url 'product_list_page' %}?page={{ num_page|add:1 }}"
                class="title-section" style="color: black">{{ num_page|add:1 }}</a>
             {% endfor %}
             {% if page_obj.has_next %}
-            <a href="{% url 'post_list_page' %}?page={{ page_obj.next_page_number }}"
+            <a href="{% url 'product_list_page' %}?page={{ page_obj.next_page_number }}"
                class="title-section" style="color: black">Next</a>
-            <a href="{% url 'post_list_page' %}?page={{ page_obj.paginator.num_pages }}"
+            <a href="{% url 'product_list_page' %}?page={{ page_obj.paginator.num_pages }}"
                class="title-section" style="color: black">Last</a>
             {% endif %}
         </div>

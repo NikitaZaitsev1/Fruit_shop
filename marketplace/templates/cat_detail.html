@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load post_lib %}
+
+{% block hero_area %}
+{% include "base_parts/nav.html" %}
+{% endblock hero_area %}
+
+
+{% block content %}
+<section class="fruit_section">
+    <div class="container">
+        {% for cat in category %}
+        <h2 class="custom_heading">Fruits
+        </h2>
+        {% endfor %}
+        {% for product in category_products %}
+        <div class="row layout_padding2">
+            <div class="col-md-8">
+                <div class="fruit_detail-box">
+                    <h3>
+                        {{ product.name }}
+                    </h3>
+                    <div>{{ product.published_date }} by {{ product.seller }}</div>
+                    <p>
+                        <a href="{% url 'cat_detail_page' product.category.pk %}" style="color: orangered">Category:
+                            {{ product.category }}</a>
+                    </p>
+                    <p class="mt-4 mb-1 text-justify">
+                        {{ product.description|truncatewords:60 }}
+                    </p>
+                    <p>
+                        <strong>Price: {{ product.price }} USD</strong>
+                    </p>
+                    <div class="quote_btn-container mt-5 ">
+                        <a href="#">
+                            Buy now
+                        </a>
+                        <a href="{% url 'product_detail_page' pk=product.pk %}">
+                            Read more
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <div class="fruit_img-box d-flex justify-content-center align-items-center">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="" class="" width="350px"/>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock content %}
+
+{% block footer %}
+<footer>
+    {% include "base_parts/footer.html" %}
+</footer>
+{% endblock footer %}

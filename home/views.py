@@ -1,5 +1,3 @@
-from django.contrib import messages
-from django.db import IntegrityError
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views.generic import TemplateView

@@ -12,28 +12,35 @@
             <div class="col-md-8">
                 <div class="fruit_detail-box">
                     <h3>
-                        {{ post.title }}
+                        {{ product.name }}
                     </h3>
-                    <div>{{ post.published_date }} by {{ post.author }}
+                    <div>{{ product.published_date }} by {{ product.seller }}
                         {% if user.is_staff %}
-                        - <a href="{% url 'post_edit_page' post.pk %}" style="color: orange">Edit</a>
-                        - <a href="{% url 'post_delete_page' post.pk %}" style="color: orange">Delete</a>
+                        - <a href="{% url 'product_edit_page' pk=product.pk%}" style="color: orange">Edit</a>
+                        - <a href="{% url 'product_delete_page' pk=product.pk %}" style="color: orange">Delete</a>
                         {% endif %}
                     </div>
+                    <p>
+                        <a href="{% url 'cat_detail_page' product.category.pk %}" style="color: orangered">Category:
+                            {{ product.category }}</a>
+                    </p>
                     <p class="mt-4 mb-1 text-justify">
-                        {{ post.text|linebreaksbr }}
+                        {{ product.description|linebreaksbr }}
                     </p>
                     <p>
-                        {% for tag in post.tag.all %}
-                        <a href="{% url 'tag_detail_page' pk=tag.pk %}" style="color: orangered">{{ tag.name }}</a>
-                        {% endfor %}
+                        <strong>Price: {{ product.price }} USD</strong>
                     </p>
+                    <div class="quote_btn-container">
+                        <a href="#">
+                            Buy now
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="fruit_img-box">
-                    {% if post.photo %}
-                    <img src="{{ post.photo.url }}" alt="" class="" width="350px"/>
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="" class="" width="350px"/>
                     {% endif %}
                 </div>
             </div>

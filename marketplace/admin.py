@@ -4,7 +4,7 @@ from marketplace.models import Product, Category
 
 
 class AdminProducts(admin.ModelAdmin):
-    list_display = ("seller", "name", "image", "created_date", "published_date")
+    list_display = ("seller", "name", "image", "moderated","created_date", "published_date")
 
 
 class AdminCategories(admin.ModelAdmin):

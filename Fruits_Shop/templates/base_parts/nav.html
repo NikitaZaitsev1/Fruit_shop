@@ -24,6 +24,15 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'product_list_page' %}"> Fruits</a>
                         </li>
+                        <!--                        <div class="nav-item dropdown">-->
+                        <!--                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Fruits</a>-->
+                        <!--                            <div class="dropdown-menu rounded-0 m-0">-->
+                        <!--                                {% for product in products %}-->
+                        <!--                                <a href="#" class="dropdown-item">product.category</a>-->
+                        <!--                                {% endfor %}-->
+
+                        <!--                            </div>-->
+                        <!--                        </div>-->
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'post_list_page' %}"> Blog</a>
                         </li>
@@ -44,9 +53,9 @@
                 {% else %}
                 <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
                     <ul class="navbar-nav ">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'post_new_page' %}">Add Post</a>
-                        </li>
+<!--                        <li class="nav-item">-->
+<!--                            <a class="nav-link" href="{% url 'post_new_page' %}">Add Post</a>-->
+<!--                        </li>-->
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'user_page' %}">Account</a>
                         </li>

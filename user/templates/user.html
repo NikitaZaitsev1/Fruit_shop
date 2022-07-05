@@ -10,20 +10,27 @@
 <section class="contact_section layout_padding">
     <div class="container">
         <h2 class="font-weight-bold">
-            Account {% if user.full_name %}{{ user.full_name }}{% else %}{{ user.username }}{% endif %}
+            Account: {% if user.full_name %}{{ user.full_name }}{% else %}{{ user.username }}{% endif %}
         </h2>
         <p>
-            {{ user.last_login }}<br>{{ user.is_active }}
+            Last login: {{ user.last_login }}<br> Is active: {{ user.is_active }}
         </p>
         <div>
-            {% if user.is_staff %}
+            <p>________________________________________________________________</p>
+            <p><strong>Your functions: </strong></p>
             <div class="quote_btn-container ml-0 ml-lg-4 d-flex ">
-                <a href="#">
-                    Add fruits
+                <a href="{% url 'product_new_page' %}">
+                    Add product
                 </a>
             </div>
-            {% endif %}
+
+            <div class="quote_btn-container ml-0 ml-lg-4 d-flex mt-3 ">
+                <a href="{% url 'post_new_page' %}">
+                    Add post
+                </a>
+            </div>
         </div>
+        <p>________________________________________________________________</p>
         <ul>
             {% for user_permission in user.user_permissions.all %}
             <li>
