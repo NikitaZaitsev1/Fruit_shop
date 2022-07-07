@@ -2,9 +2,14 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, DeleteView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, RetrieveDestroyAPIView
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 from marketplace.forms import ProductForm
 from marketplace.models import Product, Category
+from marketplace.api.permissions import IsAdminOrReadOnly
+from marketplace.api.serializers import ProductSerializer
 
 
 class ProductListView(ListView):
@@ -41,7 +46,7 @@ def cat_detail_view(request, pk):
     return render(request, 'cat_detail.html', {
         'cats': pk,
         'category_products': category_products,
-        'category':category,
+        'category': category,
         'cat_menu': cat_menu
     })
 
@@ -73,3 +78,32 @@ def product_edit_view(request, pk):
     else:
         form = ProductForm(instance=product)
     return render(request, 'product_edit.html', {'product_form': form})
+
+
+"""API VIEWS"""
+
+
+class ProductApiList(ListCreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
+
+class ProductAPIListPagination(PageNumberPagination):
+    page_size = 3
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+
+class ProductApiUpdate(RetrieveUpdateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = (IsAuthenticated,)
+    # authentication_classes = (TokenAuthentication,)
+    pagination_class = ProductAPIListPagination
+
+
+class ProductApiDestroy(RetrieveDestroyAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = (IsAdminOrReadOnly,)

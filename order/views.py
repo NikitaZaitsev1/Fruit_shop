@@ -1,9 +1,14 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.views.generic import DetailView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, RetrieveDestroyAPIView
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 from order.forms import OrderForm
 from order.models import Order
+from order.api.permissions import IsAdminOrReadOnly
+from order.api.serializers import OrderSerializer
 
 
 class OrderDetailView(DetailView):
@@ -49,3 +54,32 @@ def order_new_view(request):
     else:
         order_form = OrderForm()
         return render(request, 'order_new.html', {'order_form': order_form})
+
+
+"""API VIEWS"""
+
+
+class OrderApiList(ListCreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
+
+class OrderAPIListPagination(PageNumberPagination):
+    page_size = 3
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+
+class OrderApiUpdate(RetrieveUpdateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = (IsAuthenticated,)
+    # authentication_classes = (TokenAuthentication,)
+    pagination_class = OrderAPIListPagination
+
+
+class OrderApiDestroy(RetrieveDestroyAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = (IsAdminOrReadOnly,)

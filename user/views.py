@@ -1,6 +1,9 @@
 from django.views.generic import ListView, TemplateView
 from django.shortcuts import render
 from django.views.generic import FormView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, RetrieveDestroyAPIView
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 from order.models import Order
 from user.forms import SignUpForm, LoginForm
@@ -8,7 +11,8 @@ from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth import logout
 from user.models import User
-
+from user.api.permissions import IsAdminOrReadOnly
+from user.api.serializers import UserSerializer
 
 
 class UserView(ListView):
@@ -61,3 +65,32 @@ class SignUpView(FormView):
 def log_out(request):
     logout(request)
     return redirect(reverse("login_page"))
+
+
+"""API VIEWS"""
+
+
+class UserApiList(ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
+
+class UserAPIListPagination(PageNumberPagination):
+    page_size = 3
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+
+class UserApiUpdate(RetrieveUpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated,)
+    # authentication_classes = (TokenAuthentication,)
+    pagination_class = UserAPIListPagination
+
+
+class UserApiDestroy(RetrieveDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAdminOrReadOnly,)
