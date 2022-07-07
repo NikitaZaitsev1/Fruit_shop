@@ -31,7 +31,7 @@
                         <strong>Price: {{ product.price }} USD</strong>
                     </p>
                     <div class="quote_btn-container">
-                        <a href="#">
+                        <a href="{% url 'order_new_page' %}">
                             Buy now
                         </a>
                     </div>
@@ -51,16 +51,16 @@
 
 
 {% block footer %}
-<!--<style>-->
-<!--    footer {-->
-<!--        margin-top: 185px;-->
-<!--        height: 100px;-->
-<!--    }-->
+<style>
+    footer {
+        margin-top: 260px;
+        height: 100px;
+    }
 
-<!--    .login {-->
-<!--        margin-top: 40px;-->
-<!--    }-->
-<!--</style>-->
+    .login {
+        margin-top: 40px;
+    }
+</style>
 
 
 <footer>

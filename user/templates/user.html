@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load multiply %}
 
 {% block hero_area %}
 {% include "base_parts/nav.html" %}
@@ -30,7 +31,25 @@
                 </a>
             </div>
         </div>
-        <p>________________________________________________________________</p>
+        <p>________________________________</p>
+        {% if user.is_staff %}
+
+        <p><strong>Orders: </strong></p>
+        {% for order in orders %}
+        <p>Number: {{order.id}}</p>
+        <p>Customer: {{order.customer}}</p>
+        <p>Product: {{order.product}}</p>
+        <p>Quantity: {{order.quantity}}</p>
+        <p>Price: {% multiply order.product.price order.quantity %} USD</p>
+        <p>Address: {{order.address}}</p>
+        <p>Phone: {{order.phone}}</p>
+        <p>Date: {{order.date}}</p>
+        <p>Status: {{order.status}}</p>
+        <p>________________________________</p>
+        {% endfor %}
+
+        {% endif %}
+
         <ul>
             {% for user_permission in user.user_permissions.all %}
             <li>
@@ -62,14 +81,6 @@
 {% endblock content %}
 
 {% block footer %}
-<style>
-    footer {
-        margin-top: 212px;
-        /*Минус Высота футера*/
-        height: 100px;
-        /*Высота футера*/
-    }
-</style>
 
 
 <footer>

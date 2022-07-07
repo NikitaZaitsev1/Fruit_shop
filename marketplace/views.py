@@ -37,7 +37,13 @@ class ProductDeleteView(DeleteView):
 def cat_detail_view(request, pk):
     category_products = Product.objects.filter(category=pk)
     category = Category.objects.filter(product=pk)
-    return render(request, 'cat_detail.html', {'cats': pk, 'category_products': category_products, 'category':category})
+    cat_menu = Category.objects.all()
+    return render(request, 'cat_detail.html', {
+        'cats': pk,
+        'category_products': category_products,
+        'category':category,
+        'cat_menu': cat_menu
+    })
 
 
 def product_new_view(request):

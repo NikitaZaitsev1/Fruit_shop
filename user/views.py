@@ -1,6 +1,8 @@
 from django.views.generic import ListView, TemplateView
 from django.shortcuts import render
 from django.views.generic import FormView
+
+from order.models import Order
 from user.forms import SignUpForm, LoginForm
 from django.urls import reverse
 from django.shortcuts import redirect
@@ -17,6 +19,12 @@ class UserView(ListView):
 
 class UserDetailView(TemplateView):
     template_name = "user.html"
+
+    def get_context_data(self, *args, **kwargs):
+        orders = Order.objects.all()
+        context = super(UserDetailView, self).get_context_data(*args, **kwargs)
+        context["orders"] = orders
+        return context
 
 
 def log_in(request):

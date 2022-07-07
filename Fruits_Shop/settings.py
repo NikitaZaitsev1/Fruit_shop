@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'user',
     'post',
     'marketplace',
+    'order',
 ]
 
 MIDDLEWARE = [
@@ -67,6 +68,7 @@ TEMPLATES = [
             ],
             'libraries': {
                 'post_lib': 'Fruits_Shop.template_tags.post_lib',
+                'multiply': 'Fruits_Shop.template_tags.multiply',
             }
         },
     },

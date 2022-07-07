@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load multiply %}
+
+{% block hero_area %}
+{% include "base_parts/nav.html" %}
+{% endblock hero_area %}
+
+
+{% block content %}
+<section class="fruit_section">
+    <div class="container">
+        <div class="row layout_padding2">
+            <div class="col-md-8">
+                <div class="fruit_detail-box">
+                    <h3>
+                        Your order: № {{ order.id }}
+                    </h3>
+                    <p>
+
+                        Product: {{ order.product }}
+                    </p>
+                    <p>
+
+                        Quantity: {{ order.quantity }}
+                    </p>
+                    <p>
+
+                        Price: {% multiply order.product.price order.quantity %} USD
+                    </p>
+                    <p>
+
+                        Address: {{ order.address }}
+                    </p>
+                    <p>
+
+                        Phone: {{ order.phone }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+
+{% block footer %}
+
+<style>
+    footer {
+        margin-top: 490px;
+        height: 100px;
+    }
+
+    .login {
+        margin-top: 40px;
+    }
+</style>
+
+<footer>
+    {% include "base_parts/footer.html" %}
+</footer>
+{% endblock footer %}
+

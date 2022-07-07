@@ -11,9 +11,14 @@
 <section class="fruit_section">
     <div class="container">
         {% for cat in category %}
-        <h2 class="custom_heading">Fruits
+        <h2 class="custom_heading"><a href="{% url 'product_list_page' %}" style="color: black">Online Shop</a>
         </h2>
         {% endfor %}
+        <p class="custom_heading-text">
+            {% for category in cat_menu %}
+            <a href="{% url 'cat_detail_page' category.pk %}" style="color: orangered">{{category}} | </a>
+            {% endfor %}
+        </p>
         {% for product in category_products %}
         <div class="row layout_padding2">
             <div class="col-md-8">
@@ -33,7 +38,7 @@
                         <strong>Price: {{ product.price }} USD</strong>
                     </p>
                     <div class="quote_btn-container mt-5 ">
-                        <a href="#">
+                        <a href="{% url 'order_new_page' %}">
                             Buy now
                         </a>
                         <a href="{% url 'product_detail_page' pk=product.pk %}">
@@ -45,7 +50,7 @@
             <div class="col-md-4 d-flex justify-content-center align-items-center">
                 <div class="fruit_img-box d-flex justify-content-center align-items-center">
                     {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="" class="" width="350px"/>
+                    <img src="{{ product.image.url }}" alt="" class="" width="250px"/>
                     {% endif %}
                 </div>
             </div>

@@ -10,7 +10,7 @@
 {% block content %}
 <section class="fruit_section">
     <div class="container">
-        <h2 class="custom_heading">Fruits</h2>
+        <h2 class="custom_heading">Online Shop</h2>
         <p class="custom_heading-text">
             {% for category in cat_menu %}
             <a href="{% url 'cat_detail_page' category.pk %}" style="color: orangered">{{category}} | </a>
@@ -40,7 +40,7 @@
                         <strong>Price: {{ product.price }} USD</strong>
                     </p>
                     <div class="quote_btn-container">
-                        <a href="#">
+                        <a href="{% url 'order_new_page' %}">
                             Buy now
                         </a>
                         <a href="{% url 'product_detail_page' pk=product.pk %}">

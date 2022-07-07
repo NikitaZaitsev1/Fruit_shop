@@ -18,7 +18,7 @@ class Product(models.Model):
     seller = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=60)
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    description = models.CharField(max_length=250, default='', blank=True, null=True)
+    description = models.CharField(max_length=350, default='', blank=True, null=True)
     image = models.ImageField(upload_to='marketplace/%Y/%m/%d/')
     moderated = models.BooleanField(default=False)
     created_date = models.DateTimeField(default=timezone.now)
@@ -33,5 +33,9 @@ class Product(models.Model):
         self.published_date = timezone.now()
         self.save()
 
+
     def __str__(self):
         return self.name
+
+
+
