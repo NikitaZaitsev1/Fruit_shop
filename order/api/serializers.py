@@ -5,8 +5,8 @@ from order.models import Order
 
 
 class OrderSerializer(ModelSerializer):
-    author = HiddenField(default=CurrentUserDefault())
+    customer = HiddenField(default=CurrentUserDefault())
 
     class Meta:
         model = Order
-        fields = "__all__"
+        fields = ('id','product','customer','quantity','address','phone')

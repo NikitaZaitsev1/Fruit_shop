@@ -11,10 +11,10 @@
 <section class="contact_section layout_padding">
     <div class="container">
         <h2 class="font-weight-bold">
-            Account: {% if user.full_name %}{{ user.full_name }}{% else %}{{ user.username }}{% endif %}
+            Hello {% if user.full_name %}{{ user.full_name }}{% else %}{{ user.username }}{% endif %}!
         </h2>
         <p>
-            Last login: {{ user.last_login }}<br> Is active: {{ user.is_active }}
+            Last login: {{ user.last_login }}<br>
         </p>
         <div>
             <p>________________________________________________________________</p>
@@ -44,7 +44,12 @@
         <p>Address: {{order.address}}</p>
         <p>Phone: {{order.phone}}</p>
         <p>Date: {{order.date}}</p>
-        <p>Status: {{order.status}}</p>
+        <p>{%if not order.status %}
+            <strong>Status: Order not processed</strong>
+            {% else %}
+            <strong>Status: Order processed</strong>
+            {% endif %}
+        </p>
         <p>________________________________</p>
         {% endfor %}
 

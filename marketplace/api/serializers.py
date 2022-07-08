@@ -5,8 +5,8 @@ from marketplace.models import Product
 
 
 class ProductSerializer(ModelSerializer):
-    author = HiddenField(default=CurrentUserDefault())
+    seller = HiddenField(default=CurrentUserDefault())
 
     class Meta:
         model = Product
-        fields = "__all__"
+        fields = ('id', 'name', 'price', 'description', 'image', 'category', 'seller')

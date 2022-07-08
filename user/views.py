@@ -73,7 +73,6 @@ def log_out(request):
 class UserApiList(ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly,)
 
 
 class UserAPIListPagination(PageNumberPagination):
