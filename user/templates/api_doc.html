@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+{% load multiply %}
+
+{% block hero_area %}
+{% include "base_parts/nav.html" %}
+{% endblock hero_area %}
+
+{% block content %}
+
+<section class="contact_section layout_padding">
+    <div class="container">
+        <h2 class="font-weight-bold">
+            API documentation:
+        </h2>
+        <div class="mt-5">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Model</th>
+                    <th scope="col">URL</th>
+                    <th scope="col">OPTION</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>FeedBack</td>
+                    <td>api/v1/feedback/</td>
+                    <td>FeedBackApiList</td>
+                </tr>
+                <tr>
+                    <td>FeedBack</td>
+                    <td>api/v1/feedback/</td>
+                    <td>FeedBackApiList</td>
+                </tr>
+                <tr>
+                    <td>FeedBack</td>
+                    <td>api/v1/feedback/</td>
+                    <td>FeedBackApiList</td>
+                </tr>
+
+                </tbody>
+
+            </table>
+
+            <p>
+                API Documentation:
+            </p>
+            <p>
+                http://127.0.0.1:8000/api/v1/post/ - Post list
+            </p>
+            <p>
+                http://127.0.0.1:8000/api/v1/post/int:pk/ - Post update
+            </p>
+            <p>
+                http://127.0.0.1:8000/api/v1/postdelete/int:pk/ - Post delete
+            </p>
+            <p>
+                http://127.0.0.1:8000/api/v1/auth/users/ - User list
+            </p>
+            <p>
+                http://127.0.0.1:8000/auth/token/login/ - Token authorization
+            </p>
+        </div>
+</section>
+
+{% endblock content %}
+
+{% block footer %}
+
+
+<footer>
+    {% include "base_parts/footer.html" %}
+</footer>
+{% endblock footer %}
+
+<style>
+    footer {
+        margin-top: 250px;
+        /*Минус Высота футера*/
+        height: 100px;
+        /*Высота футера*/
+    }
+</style>

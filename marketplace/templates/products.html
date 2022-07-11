@@ -8,6 +8,7 @@
 
 
 {% block content %}
+
 <section class="fruit_section">
     <div class="container">
         <h2 class="custom_heading">Online Shop</h2>
@@ -24,9 +25,11 @@
                         {{ product.name }}
                     </h3>
                     <div>{{ product.published_date }} by {{ product.seller }}
-                        {% if user.is_staff %}
-                        - <a href="{% url 'product_edit_page' pk=product.pk %}" style="color: orange">Edit</a>
-                        - <a href="{% url 'product_delete_page' pk=product.pk %}" style="color: orange">Delete</a>
+                        {% if user.is_authenticated %}
+                            {% if user.id == product.seller.id %}
+                            - <a href="{% url 'product_edit_page' pk=product.pk %}" style="color: orange">Edit</a>
+                            - <a href="{% url 'product_delete_page' pk=product.pk %}" style="color: orange">Delete</a>
+                            {% endif %}
                         {% endif %}
                     </div>
                     <p>

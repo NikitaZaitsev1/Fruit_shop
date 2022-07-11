@@ -16,5 +16,6 @@ class Order(models.Model):
     status = models.BooleanField(default=False)
 
     class Meta:
+        db_table = "orders"
         verbose_name = "Order"
         verbose_name_plural = "Orders"

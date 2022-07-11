@@ -7,6 +7,4 @@ urlpatterns = [
     path('api/v1/user/', UserApiList.as_view()),
     path('api/v1/user/<int:pk>/', UserApiUpdate.as_view()),
     path('api/v1/userdelete/<int:pk>/', UserApiDestroy.as_view()),
-    path('api/v1/auth/', include('djoser.urls')),
-    re_path(r'^auth/', include('djoser.urls.authtoken')),
 ]

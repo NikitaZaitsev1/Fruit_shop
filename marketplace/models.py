@@ -7,6 +7,7 @@ class Category(models.Model):
     name = models.CharField(max_length=100)
 
     class Meta:
+        db_table = "categories"
         verbose_name = "Category"
         verbose_name_plural = "Categories"
 
@@ -26,6 +27,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
 
     class Meta:
+        db_table = "products"
         verbose_name = "Product"
         verbose_name_plural = "Products"
 

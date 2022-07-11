@@ -6,6 +6,9 @@ from django.utils import timezone
 class Tag(models.Model):
     name = models.CharField(max_length=100)
 
+    class Meta:
+        db_table = "tags"
+
     def __str__(self):
         return self.name
 
@@ -19,6 +22,9 @@ class Post(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     tag = models.ManyToManyField(Tag, blank=True, related_name='posts')
+
+    class Meta:
+        db_table = "posts"
 
     def publish(self):
         self.published_date = timezone.now()

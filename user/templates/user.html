@@ -16,70 +16,75 @@
         <p>
             Last login: {{ user.last_login }}<br>
         </p>
-        <div>
-            <p>________________________________________________________________</p>
+        <div class = "mt-5">
+
             <p><strong>Your functions: </strong></p>
-            <div class="quote_btn-container ml-0 ml-lg-4 d-flex ">
-                <a href="{% url 'product_new_page' %}">
-                    Add product
-                </a>
-            </div>
-
-            <div class="quote_btn-container ml-0 ml-lg-4 d-flex mt-3 ">
-                <a href="{% url 'post_new_page' %}">
-                    Add post
-                </a>
-            </div>
-        </div>
-        <p>________________________________</p>
-        {% if user.is_staff %}
-
-        <p><strong>Orders: </strong></p>
-        {% for order in orders %}
-        <p>Number: {{order.id}}</p>
-        <p>Customer: {{order.customer}}</p>
-        <p>Product: {{order.product}}</p>
-        <p>Quantity: {{order.quantity}}</p>
-        <p>Price: {% multiply order.product.price order.quantity %} USD</p>
-        <p>Address: {{order.address}}</p>
-        <p>Phone: {{order.phone}}</p>
-        <p>Date: {{order.date}}</p>
-        <p>{%if not order.status %}
-            <strong>Status: Order not processed</strong>
+            {% if user.is_staff %}
+            <p><a href="{% url 'product_new_page' %}" style="color: orangered">
+                Add product
+            </a></p>
+            <p><a href="{% url 'post_new_page' %}" style="color: orangered">
+                Add post
+            </a></p>
             {% else %}
-            <strong>Status: Order processed</strong>
+            <p><a href="{% url 'post_new_page' %}" style="color: orangered">
+                Add post
+            </a></p>
             {% endif %}
-        </p>
-        <p>________________________________</p>
-        {% endfor %}
+        </div>
 
-        {% endif %}
+        <div class="mt-5">
+            <p><strong>Your posts: </strong></p>
+            {% for post in posts %}
 
-        <ul>
-            {% for user_permission in user.user_permissions.all %}
-            <li>
-                {{ user_permission.name }}
-            </li>
+            {% if user.id == post.author.id %}
+            <p><a href="{% url 'post_detail_page' pk=post.pk %}" style="color: orangered">{{ post.title }}</a> ,
+                date: {{ post.published_date }}</p>
+            {% endif %}
+
             {% endfor %}
-        </ul>
-        <p>
-            API Documentation:
-        </p>
-        <p>
-            http://127.0.0.1:8000/api/v1/post/ - Post list
-        </p>
-        <p>
-            http://127.0.0.1:8000/api/v1/post/int:pk/ - Post update
-        </p>
-        <p>
-            http://127.0.0.1:8000/api/v1/postdelete/int:pk/ - Post delete
-        </p>
-        <p>
-            http://127.0.0.1:8000/api/v1/auth/users/ - User list
-        </p>
-        <p>
-            http://127.0.0.1:8000/auth/token/login/ - Token authorization
-        </p>
+        </div>
+
+        <div class="mb-4 mt-5"><strong>Your orders:</strong></div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Number</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Product</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Address</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Date</th>
+                <th scope="col">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                {% for order in orders %}
+                {% if user.id == order.customer.id %}
+                <td>{{order.id}}</td>
+                <td>{{order.customer}}</td>
+                <td>{{order.product}}</td>
+                <td>{{order.quantity}}</td>
+                <td>{% multiply order.product.price order.quantity %} USD</td>
+                <td>{{order.address}}</td>
+                <td>{{order.phone}}</td>
+                <td>{{order.date}}</td>
+                <td>
+                    {%if not order.status %}
+                    Order not processed
+                    {% else %}
+                    Order processed
+                    {% endif %}
+                </td>
+
+            </tr>
+            {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 </section>
 
@@ -89,15 +94,15 @@
 
 
 <footer>
-    {% include "base_parts/footer.html" %}
-</footer>
-{% endblock footer %}
-
-<style>
+    <style>
     footer {
-        margin-top: 250px;
+        margin-top:65px;
         /*Минус Высота футера*/
         height: 100px;
         /*Высота футера*/
     }
 </style>
+    {% include "base_parts/footer.html" %}
+</footer>
+{% endblock footer %}
+

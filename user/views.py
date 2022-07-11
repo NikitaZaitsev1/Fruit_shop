@@ -6,6 +6,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 from order.models import Order
+from post.models import Post
 from user.forms import SignUpForm, LoginForm
 from django.urls import reverse
 from django.shortcuts import redirect
@@ -26,9 +27,15 @@ class UserDetailView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         orders = Order.objects.all()
+        posts = Post.objects.all()
         context = super(UserDetailView, self).get_context_data(*args, **kwargs)
         context["orders"] = orders
+        context["posts"] = posts
         return context
+
+
+class ApiDocView(TemplateView):
+    template_name = "api_doc.html"
 
 
 def log_in(request):
