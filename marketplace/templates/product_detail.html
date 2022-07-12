@@ -14,9 +14,9 @@
                     <h3>
                         {{ product.name }}
                     </h3>
-                    <div>{{ product.published_date }} by {{ product.seller }}
+                    <div>
                         {% if user.is_staff %}
-                        - <a href="{% url 'product_edit_page' pk=product.pk%}" style="color: orange">Edit</a>
+                        <a href="{% url 'product_edit_page' pk=product.pk %}" style="color: orange">Edit</a>
                         - <a href="{% url 'product_delete_page' pk=product.pk %}" style="color: orange">Delete</a>
                         {% endif %}
                     </div>
@@ -31,9 +31,15 @@
                         <strong>Price: {{ product.price }} USD</strong>
                     </p>
                     <div class="quote_btn-container">
+                        {% if user.is_authenticated %}
                         <a href="{% url 'order_new_page' %}">
                             Buy now
                         </a>
+                        {% else %}
+                        <a href="{% url 'login_page' %}">
+                            Buy now
+                        </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

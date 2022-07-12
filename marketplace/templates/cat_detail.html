@@ -10,13 +10,11 @@
 {% block content %}
 <section class="fruit_section">
     <div class="container">
-        {% for cat in category %}
         <h2 class="custom_heading"><a href="{% url 'product_list_page' %}" style="color: black">Online Shop</a>
         </h2>
-        {% endfor %}
         <p class="custom_heading-text">
             {% for category in cat_menu %}
-            <a href="{% url 'cat_detail_page' category.pk %}" style="color: orangered">{{category}} | </a>
+            <a href="{% url 'cat_detail_page' category.pk %}" style="color: orangered">{{category}} </a>
             {% endfor %}
         </p>
         {% for product in category_products %}
@@ -26,7 +24,12 @@
                     <h3>
                         {{ product.name }}
                     </h3>
-                    <div>{{ product.published_date }} by {{ product.seller }}</div>
+                    <div>
+                        {% if user.is_staff %}
+                        <a href="{% url 'product_edit_page' pk=product.pk %}" style="color: orange">Edit</a>
+                        - <a href="{% url 'product_delete_page' pk=product.pk %}" style="color: orange">Delete</a>
+                        {% endif %}
+                    </div>
                     <p>
                         <a href="{% url 'cat_detail_page' product.category.pk %}" style="color: orangered">Category:
                             {{ product.category }}</a>
@@ -38,9 +41,15 @@
                         <strong>Price: {{ product.price }} USD</strong>
                     </p>
                     <div class="quote_btn-container mt-5 ">
+                        {% if user.is_authenticated %}
                         <a href="{% url 'order_new_page' %}">
                             Buy now
                         </a>
+                        {% else %}
+                        <a href="{% url 'login_page' %}">
+                            Buy now
+                        </a>
+                        {% endif %}
                         <a href="{% url 'product_detail_page' pk=product.pk %}">
                             Read more
                         </a>

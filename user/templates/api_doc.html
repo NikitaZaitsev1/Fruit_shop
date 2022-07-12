@@ -31,38 +31,93 @@
                 </tr>
                 <tr>
                     <td>FeedBack</td>
-                    <td>api/v1/feedback/</td>
-                    <td>FeedBackApiList</td>
+                    <td>api/v1/feedback/int:pk/</td>
+                    <td>FeedBackApiUpdate</td>
                 </tr>
                 <tr>
                     <td>FeedBack</td>
-                    <td>api/v1/feedback/</td>
-                    <td>FeedBackApiList</td>
+                    <td>api/v1/feedbackdelete/int:pk/</td>
+                    <td>FeedBackApiDestroy</td>
                 </tr>
-
+                <tr>
+                    <td>Product</td>
+                    <td>api/v1/product/</td>
+                    <td>ProductApiList</td>
+                </tr>
+                <tr>
+                    <td>Product</td>
+                    <td>api/v1/product/int:pk/</td>
+                    <td>ProductApiUpdate</td>
+                </tr>
+                <tr>
+                    <td>Product</td>
+                    <td>api/v1/productdelete/int:pk/</td>
+                    <td>ProductApiDestroy</td>
+                </tr>
+                <tr>
+                    <td>Order</td>
+                    <td>api/v1/order/</td>
+                    <td>OrderApiList</td>
+                </tr>
+                <tr>
+                    <td>Order</td>
+                    <td>api/v1/order/int:pk/</td>
+                    <td>OrderApiUpdate</td>
+                </tr>
+                <tr>
+                    <td>Order</td>
+                    <td>api/v1/orderdelete/int:pk/</td>
+                    <td>OrderApiDestroy</td>
+                </tr>
+                <tr>
+                    <td>Post</td>
+                    <td>api/v1/post/</td>
+                    <td>PostApiList</td>
+                </tr>
+                <tr>
+                    <td>Post</td>
+                    <td>api/v1/post/int:pk/</td>
+                    <td>PostApiUpdate</td>
+                </tr>
+                <tr>
+                    <td>Post</td>
+                    <td>api/v1/postdelete/int:pk/</td>
+                    <td>PostApiDestroy</td>
+                </tr>
+                <tr>
+                    <td>User</td>
+                    <td>api/v1/user/</td>
+                    <td>UserApiList</td>
+                </tr>
+                <tr>
+                    <td>User</td>
+                    <td>api/v1/user/int:pk/</td>
+                    <td>UserApiUpdate</td>
+                </tr>
+                <tr>
+                    <td>User</td>
+                    <td>api/v1/userdelete/int:pk/</td>
+                    <td>UserApiDestroy</td>
+                </tr>
+                <tr>
+                    <td>JWT Token</td>
+                    <td>api/v1/token/</td>
+                    <td>TokenObtainPair</td>
+                </tr>
+                <tr>
+                    <td>JWT Token</td>
+                    <td>api/v1/token/refresh/</td>
+                    <td>TokenRefresh</td>
+                </tr>
+                <tr>
+                    <td>JWT Token</td>
+                    <td>api/v1/token/verify/</td>
+                    <td>TokenVerify</td>
+                </tr>
                 </tbody>
-
             </table>
-
-            <p>
-                API Documentation:
-            </p>
-            <p>
-                http://127.0.0.1:8000/api/v1/post/ - Post list
-            </p>
-            <p>
-                http://127.0.0.1:8000/api/v1/post/int:pk/ - Post update
-            </p>
-            <p>
-                http://127.0.0.1:8000/api/v1/postdelete/int:pk/ - Post delete
-            </p>
-            <p>
-                http://127.0.0.1:8000/api/v1/auth/users/ - User list
-            </p>
-            <p>
-                http://127.0.0.1:8000/auth/token/login/ - Token authorization
-            </p>
         </div>
+    </div>
 </section>
 
 {% endblock content %}

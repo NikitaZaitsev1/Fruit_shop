@@ -24,7 +24,7 @@
                     </h3>
                     <div>{{ post.published_date }} by {{ post.author }}
                         {% if user.is_authenticated %}
-                            {% if user.id == post.author.id %}
+                            {% if user.id == post.author.id or user.is_staff %}
                             - <a href="{% url 'post_edit_page' post.pk %}" style="color: orange">Edit</a>
                             - <a href="{% url 'post_delete_page' post.pk %}" style="color: orange">Delete</a>
                             {% endif %}

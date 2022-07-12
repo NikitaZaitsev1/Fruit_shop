@@ -14,7 +14,7 @@
         <h2 class="custom_heading">Online Shop</h2>
         <p class="custom_heading-text">
             {% for category in cat_menu %}
-            <a href="{% url 'cat_detail_page' category.pk %}" style="color: orangered">{{category}} | </a>
+            <a href="{% url 'cat_detail_page' category.pk %}" style="color: orangered">{{category}}  </a>
             {% endfor %}
         </p>
         {% for product in products %}
@@ -24,12 +24,10 @@
                     <h3>
                         {{ product.name }}
                     </h3>
-                    <div>{{ product.published_date }} by {{ product.seller }}
-                        {% if user.is_authenticated %}
-                            {% if user.id == product.seller.id %}
-                            - <a href="{% url 'product_edit_page' pk=product.pk %}" style="color: orange">Edit</a>
-                            - <a href="{% url 'product_delete_page' pk=product.pk %}" style="color: orange">Delete</a>
-                            {% endif %}
+                    <div>
+                        {% if user.is_staff %}
+                        <a href="{% url 'product_edit_page' pk=product.pk %}" style="color: orange">Edit</a>
+                        - <a href="{% url 'product_delete_page' pk=product.pk %}" style="color: orange">Delete</a>
                         {% endif %}
                     </div>
                     <p>
@@ -43,9 +41,15 @@
                         <strong>Price: {{ product.price }} USD</strong>
                     </p>
                     <div class="quote_btn-container">
+                        {% if user.is_authenticated %}
                         <a href="{% url 'order_new_page' %}">
                             Buy now
                         </a>
+                        {% else %}
+                        <a href="{% url 'login_page' %}">
+                            Buy now
+                        </a>
+                        {% endif %}
                         <a href="{% url 'product_detail_page' pk=product.pk %}">
                             Read more
                         </a>

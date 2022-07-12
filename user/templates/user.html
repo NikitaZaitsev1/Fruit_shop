@@ -16,7 +16,7 @@
         <p>
             Last login: {{ user.last_login }}<br>
         </p>
-        <div class = "mt-5">
+        <div class="mt-5">
 
             <p><strong>Your functions: </strong></p>
             {% if user.is_staff %}
@@ -26,10 +26,13 @@
             <p><a href="{% url 'post_new_page' %}" style="color: orangered">
                 Add post
             </a></p>
+            <p><a href="{% url 'api_doc_page' %}" style="color: orangered">
+                API documentation</a></p>
             {% else %}
             <p><a href="{% url 'post_new_page' %}" style="color: orangered">
-                Add post
-            </a></p>
+                Add post</a></p>
+            <p><a href="{% url 'api_doc_page' %}" style="color: orangered">
+                API documentation</a></p>
             {% endif %}
         </div>
 
@@ -95,13 +98,13 @@
 
 <footer>
     <style>
-    footer {
-        margin-top:65px;
-        /*Минус Высота футера*/
-        height: 100px;
-        /*Высота футера*/
-    }
-</style>
+        footer {
+            margin-top: 65px;
+            /*Минус Высота футера*/
+            height: 100px;
+            /*Высота футера*/
+        }
+    </style>
     {% include "base_parts/footer.html" %}
 </footer>
 {% endblock footer %}
