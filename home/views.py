@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, RetrieveDestroyAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
@@ -9,14 +9,29 @@ from home.forms import FeedBackForm
 from home.models import FeedBack
 from home.api.permissions import IsAdminOrReadOnly
 from home.api.serializers import FeedBackSerializer
+from marketplace.models import Product
+from post.models import Post
 
 
-class HomeView(TemplateView):
+class HomeView(ListView):
+    model = Product
     template_name = "home.html"
+    context_object_name = 'products'
+    paginate_by = 3
+    ordering = ['published_date']
+
+
+    def get_context_data(self, *args, **kwargs):
+        posts = Post.objects.all()
+        context = super(HomeView, self).get_context_data(*args, **kwargs)
+        context["posts"] = posts
+        return context
 
 
 class AboutView(TemplateView):
     template_name = "about.html"
+
+
 
 
 def contacts_view(request):
@@ -33,9 +48,6 @@ def contacts_view(request):
     }
     return render(request, "contact.html", context)
 
-
-class FruitsView(TemplateView):
-    template_name = "fruits.html"
 
 
 """API VIEWS"""

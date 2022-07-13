@@ -18,6 +18,13 @@ class PostListView(ListView):
     context_object_name = 'posts'
     paginate_by = 3
     ordering = ['-published_date']
+    # def get_context_data(self, *args, **kwargs):
+    #     posts_published = Post.post_manager.all()
+    #     context = super().get_context_data(*args, **kwargs)
+    #     context["posts_published"] = posts_published
+    #     # context["posts_published"] = context.pop("object_list")
+    #
+    #     return context
 
 
 class PostDetailView(DetailView):
@@ -88,7 +95,6 @@ class PostApiUpdate(RetrieveUpdateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (IsAuthenticated,)
-    # authentication_classes = (TokenAuthentication,)
     pagination_class = PostAPIListPagination
 
 

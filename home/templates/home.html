@@ -1,16 +1,96 @@
 {% extends "base.html" %}
 
 {% block hero_area %}
-<div class="hero_area">
+<div class="hero_area" style="height: 670px">
     {% include "base_parts/nav.html" %}
     {% include "home_parts/1_slider_section.html" %}
 </div>
 {% endblock hero_area %}
 
 {% block content %}
-{% include "home_parts/2_sevice_section.html" %}
-{% include "home_parts/3_fruits_section.html" %}
+<section class="service_section layout_padding ">
+    <div class="container">
+        <h2 class="custom_heading">Our Blog</h2>
+        <p class="custom_heading-text">
+            There are many variations of passages of Lorem Ipsum available, but
+            the majority have
+        </p>
+        <div class=" layout_padding2">
+
+            <div class="card-deck">
+                {% for post in posts %}
+                <div class="card">
+                    <a href="" style="color: black;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.title }}</h5>
+                            <div style="margin-bottom: 10px">{{ post.published_date }} by {{ post.author }}
+                            </div>
+                            <p class="card-text">
+                                {{ post.text|truncatewords:50}}
+                            </p>
+                        </div>
+
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <a href="{% url 'post_list_page' %}" class="custom_dark-btn">
+                Read More
+            </a>
+        </div>
+    </div>
+</section>
+<section class="fruit_section">
+    <div class="container">
+        <h2 class="custom_heading">Fresh Fruits</h2>
+        <p class="custom_heading-text">
+            There are many variations of passages of Lorem Ipsum available, but
+            the majority have
+        </p>
+        {% for product in products %}
+        <div class="row layout_padding2">
+            <div class="col-md-8">
+                <div class="fruit_detail-box">
+                    <h3>
+                        {{ product.name }}
+                    </h3>
+                    <p>
+                        <a href="{% url 'cat_detail_page' product.category.pk %}" style="color: orangered">Category:
+                            {{ product.category }}</a>
+                    </p>
+                    <p class="mt-4 mb-5">
+                        {{ product.description|truncatewords:60 }}
+                    </p>
+                    <p>
+                        <strong>Price: {{ product.price }} USD</strong>
+                    </p>
+                    <div class="quote_btn-container">
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'order_new_page' %}">
+                            Buy now
+                        </a>
+                        {% else %}
+                        <a href="{% url 'login_page' %}">
+                            Buy now
+                        </a>
+                        {% endif %}
+                        <a href="{% url 'product_detail_page' pk=product.pk %}">
+                            Read more
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" alt="" class="" width="250px"/>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
 {% include "home_parts/4_tasty_section.html" %}
-{% include "home_parts/6_contact_section.html" %}
-{% include "home_parts/7_map_section.html" %}
 {% endblock content %}

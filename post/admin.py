@@ -3,7 +3,7 @@ from post.models import Post, Tag
 
 
 class AdminPosts(admin.ModelAdmin):
-    list_display = ("author", "title", "photo", "created_date", "published_date")
+    list_display = ("author", "title", "photo", "created_date", "published_date","is_published")
 
 
 admin.site.register(Post, AdminPosts)
