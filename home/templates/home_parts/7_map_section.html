@@ -1,139 +1,42 @@
 {% load static %}
-<section class="map_section">
-    <div id="map" class="h-100 w-100 ">
-    </div>
-</section>
+<!--<section class="map_section">-->
+<!--    <div id="map" class="h-100 w-100 ">-->
+<!--    </div>-->
+<!--</section>-->
 
 
-<section class="info_section layout_padding">
+<section class="info_section layout_padding" style="background-color:#ffa812">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
                 <h5>
-                    Fruits
+                    <a href="{% url 'product_list_page' %}" style="color: black"><strong>Online Shop</strong></a>
                 </h5>
-                <ul>
-                    <li>
-                        randomised
-                    </li>
-                    <li>
-                        words which
-                    </li>
-                    <li>
-                        don't look even
-                    </li>
-                    <li>
-                        slightly
-                    </li>
-                    <li>
-                        believable. If you
-                    </li>
-                    <li>
-                        are going to use
-                    </li>
-                    <li>
-                        a passage of
-                    </li>
-                    <li>
-                        Lorem Ipsum,
-                    </li>
-                </ul>
+                <p>
+                    The most delicious and fresh fruit, vegetables and dry fruits
+                </p>
             </div>
             <div class="col-md-3">
                 <h5>
-                    Services
+                    <a href="{% url 'post_list_page' %}" style="color: black"><strong>Blog</strong></a>
                 </h5>
-                <ul>
-                    <li>
-                        randomised
-                    </li>
-                    <li>
-                        words which
-                    </li>
-                    <li>
-                        don't look even
-                    </li>
-                    <li>
-                        slightly
-                    </li>
-                    <li>
-                        believable. If you
-                    </li>
-                    <li>
-                        are going to use
-                    </li>
-                    <li>
-                        a passage of
-                    </li>
-                    <li>
-                        Lorem Ipsum,
-                    </li>
-                </ul>
+                <p>Interesting articles about fruits</p>
             </div>
             <div class="col-md-3">
                 <h5>
-                    List
+                    <a href="{% url 'about_page' %}" style="color: black"><strong>About Us</strong></a>
                 </h5>
-                <ul>
-                    <li>
-                        randomised
-                    </li>
-                    <li>
-                        words which
-                    </li>
-                    <li>
-                        don't look even
-                    </li>
-                    <li>
-                        slightly
-                    </li>
-                    <li>
-                        believable. If you
-                    </li>
-                    <li>
-                        are going to use
-                    </li>
-                    <li>
-                        a passage of
-                    </li>
-                    <li>
-                        Lorem Ipsum,
-                    </li>
-                </ul>
+                <p>We facilitate our customers with the farm-fresh quality products. You never deliver stale or
+                    contaminated food to them. </p>
+
             </div>
             <div class="col-md-3">
                 <div class="social_container">
                     <h5>
-                        Follow Us
+                        <a href="{% url 'contact_page' %}" style="color: black"><strong>Contact Us</strong></a>
                     </h5>
-                    <div class="social-box">
-                        <a href="">
-                            <img src="{% static 'images/fb.png' %}" alt="">
-                        </a>
-
-                        <a href="">
-                            <img src="{% static 'images/twitter.png' %}" alt="">
-                        </a>
-                        <a href="">
-                            <img src="{% static 'images/linkedin.png' %}" alt="">
-                        </a>
-                        <a href="">
-                            <img src="{% static 'images/instagram.png' %}" alt="">
-                        </a>
-                    </div>
-                </div>
-                <div class="subscribe_container">
-                    <h5>
-                        Subscribe Now
-                    </h5>
-                    <div class="form_container">
-                        <form action="">
-                            <input type="email">
-                            <button type="submit">
-                                Subscribe
-                            </button>
-                        </form>
-                    </div>
+                    <p>Address: {{ address }} </p>
+                    <p>Phone: {{ phone }}</p>
                 </div>
             </div>
         </div>

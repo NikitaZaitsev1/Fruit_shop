@@ -17,7 +17,7 @@ class ProductListView(ListView):
     template_name = 'products.html'
     context_object_name = 'products'
     paginate_by = 5
-    ordering = ['-published_date']
+    ordering = ['?']
 
     def get_context_data(self, *args, **kwargs):
         cat_menu = Category.objects.all()
@@ -40,7 +40,7 @@ class ProductDeleteView(DeleteView):
 
 
 def cat_detail_view(request, pk):
-    category_products = Product.objects.filter(category=pk)
+    category_products = Product.objects.filter(category=pk).order_by('?')
     category = Category.objects.filter(product=pk)
     cat_menu = Category.objects.all()
     return render(request, 'cat_detail.html', {
@@ -99,7 +99,6 @@ class ProductApiUpdate(RetrieveUpdateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = (IsAuthenticated,)
-    # authentication_classes = (TokenAuthentication,)
     pagination_class = ProductAPIListPagination
 
 

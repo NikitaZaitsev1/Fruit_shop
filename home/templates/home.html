@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block hero_area %}
 <div class="hero_area" style="height: 670px">
@@ -16,39 +17,33 @@
             the majority have
         </p>
         <div class=" layout_padding2">
-
             <div class="card-deck">
-                {% for post in posts %}
+                {% for post in latest_posts %}
                 <div class="card">
-                    <a href="" style="color: black;">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ post.title }}</h5>
-                            <div style="margin-bottom: 10px">{{ post.published_date }} by {{ post.author }}
-                            </div>
-                            <p class="card-text">
-                                {{ post.text|truncatewords:50}}
-                            </p>
-                        </div>
-
-                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{post.title}}</h5>
+                        <p class="card-text">
+                            {{post.text|truncatewords:50}}
+                        </p>
+                    </div>
                 </div>
                 {% endfor %}
             </div>
         </div>
+
         <div class="d-flex justify-content-center">
-            <a href="{% url 'post_list_page' %}" class="custom_dark-btn">
+            <a href="" class="custom_dark-btn">
                 Read More
             </a>
         </div>
     </div>
 </section>
-<section class="fruit_section">
+{% include "home_parts/4_tasty_section.html" %}
+<section class="fruit_section mb-5">
     <div class="container">
-        <h2 class="custom_heading">Fresh Fruits</h2>
-        <p class="custom_heading-text">
-            There are many variations of passages of Lorem Ipsum available, but
-            the majority have
-        </p>
+        <h2 class="custom_heading mt-5"><a href="{% url 'product_list_page' %}" style="color: black">Fresh Fruits</a>
+        </h2>
+
         {% for product in products %}
         <div class="row layout_padding2">
             <div class="col-md-8">
@@ -92,5 +87,4 @@
 
     </div>
 </section>
-{% include "home_parts/4_tasty_section.html" %}
 {% endblock content %}

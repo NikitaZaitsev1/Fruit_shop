@@ -10,10 +10,10 @@ class Order(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
-    address = models.CharField(max_length=100, default='', blank=True)
-    phone = models.CharField(max_length=100, default='', blank=True)
+    address = models.CharField(max_length=100)
+    phone = models.CharField(max_length=100)
     date = models.DateTimeField(default=timezone.now)
-    status = models.BooleanField(default=False)
+    processed = models.BooleanField(default=False)
 
     class Meta:
         db_table = "orders"

@@ -21,17 +21,14 @@ class HomeView(ListView):
     ordering = ['published_date']
 
 
-    def get_context_data(self, *args, **kwargs):
-        posts = Post.objects.all()
-        context = super(HomeView, self).get_context_data(*args, **kwargs)
-        context["posts"] = posts
+    def get_context_data(self, **kwargs):
+        context = super(HomeView,self).get_context_data(**kwargs)
+        context['latest_posts'] = Post.objects.all()[:3]
         return context
 
 
 class AboutView(TemplateView):
     template_name = "about.html"
-
-
 
 
 def contacts_view(request):
@@ -47,7 +44,6 @@ def contacts_view(request):
         "field_name": ["Full Name", "Email", "Phone", "Message"]
     }
     return render(request, "contact.html", context)
-
 
 
 """API VIEWS"""
@@ -69,7 +65,6 @@ class FeedBackApiUpdate(RetrieveUpdateAPIView):
     queryset = FeedBack.objects.all()
     serializer_class = FeedBackSerializer
     permission_classes = (IsAuthenticated,)
-    # authentication_classes = (TokenAuthentication,)
     pagination_class = FeedBackAPIListPagination
 
 

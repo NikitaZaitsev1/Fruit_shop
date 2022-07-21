@@ -1,6 +1,37 @@
-  <section class="container-fluid footer_section">
-    <p>
-      Copyright &copy; 2022 All Rights Reserved By
-      <a href="https://html.design/">Fruits Shop Tropiko</a>
-    </p>
-  </section>
+<section class="info_section layout_padding" style="background-color:darkorange" >
+    <div class="container" style="height: 120px">
+        <div class="row">
+            <div class="col-md-3">
+                <h5>
+                    <a href="{% url 'product_list_page' %}" style="color: black"><strong>Online Shop</strong></a>
+                </h5>
+                <p>
+                    The most delicious and fresh fruit, vegetables and dry fruits
+                </p>
+            </div>
+            <div class="col-md-3">
+                <h5>
+                    <a href="{% url 'post_list_page' %}" style="color: black"><strong>Blog</strong></a>
+                </h5>
+                <p>Interesting articles about fruits</p>
+            </div>
+            <div class="col-md-3">
+                <h5>
+                    <a href="{% url 'about_page' %}" style="color: black"><strong>About Us</strong></a>
+                </h5>
+                <p>We facilitate our customers with the farm-fresh quality products. You never deliver stale or
+                    contaminated food to them. </p>
+
+            </div>
+            <div class="col-md-3">
+                <div class="social_container">
+                    <h5>
+                        <a href="{% url 'contact_page' %}" style="color: black"><strong>Contact Us</strong></a>
+                    </h5>
+                    <p>Address: 90210 Broadway Blvd., Nashville, TN 37011-5678 </p>
+                    <p>Phone: +44 7911 123456 </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

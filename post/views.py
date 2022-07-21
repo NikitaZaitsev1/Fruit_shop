@@ -13,7 +13,7 @@ from post.api.serializers import PostSerializer
 
 
 class PostListView(ListView):
-    model = Post
+    queryset = Post.objects.filter(is_published=True)
     template_name = 'posts.html'
     context_object_name = 'posts'
     paginate_by = 3
