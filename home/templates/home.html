@@ -13,17 +13,19 @@
     <div class="container">
         <h2 class="custom_heading">Our Blog</h2>
         <p class="custom_heading-text">
-            There are many variations of passages of Lorem Ipsum available, but
-            the majority have
+            There are many interesting articles about fruits
         </p>
         <div class=" layout_padding2">
             <div class="card-deck">
                 {% for post in latest_posts %}
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">{{post.title}}</h5>
-                        <p class="card-text">
+                        <h5 class="card-title"><a href="{% url 'post_detail_page' pk=post.pk %}"
+                                                  style="color: orangered">{{post.title}}</a>
+                        </h5>
+                        <p class="card-text"><a href="{% url 'post_detail_page' pk=post.pk %}" style="color: black">
                             {{post.text|truncatewords:50}}
+                        </a>
                         </p>
                     </div>
                 </div>
@@ -32,7 +34,7 @@
         </div>
 
         <div class="d-flex justify-content-center">
-            <a href="" class="custom_dark-btn">
+            <a href="{% url 'post_list_page' %}" class="custom_dark-btn">
                 Read More
             </a>
         </div>

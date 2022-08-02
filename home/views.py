@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.views.generic import TemplateView, ListView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, RetrieveDestroyAPIView
@@ -20,11 +20,14 @@ class HomeView(ListView):
     paginate_by = 3
     ordering = ['published_date']
 
-
     def get_context_data(self, **kwargs):
-        context = super(HomeView,self).get_context_data(**kwargs)
+        context = super(HomeView, self).get_context_data(**kwargs)
         context['latest_posts'] = Post.objects.all()[:3]
         return context
+
+    def post_detail_view(request, pk):
+        post = get_object_or_404(Post, pk=pk)
+        return render(request, 'post_detail.html', context={'post': post})
 
 
 class AboutView(TemplateView):

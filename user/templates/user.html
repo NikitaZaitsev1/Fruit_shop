@@ -76,7 +76,7 @@
                 <td>{{order.phone}}</td>
                 <td>{{order.date}}</td>
                 <td>
-                    {%if not order.status %}
+                    {%if not order.processed %}
                     Order not processed
                     {% else %}
                     Order processed
