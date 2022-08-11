@@ -14,6 +14,8 @@ from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from mail import USER, PASSWORD, APP_PASSWORD, APP_PASSWORD2
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -207,3 +209,21 @@ LOGGING = {
         },
     },
 }
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_HOST_USER = USER
+EMAIL_HOST_PASSWORD = APP_PASSWORD2
+EMAIL_PORT = 587
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+REDIS_HOST = '0.0.0.0'
+REDIS_PORT = '6379'
+
+CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'

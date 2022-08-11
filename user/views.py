@@ -14,6 +14,9 @@ from django.contrib.auth import logout
 from user.models import User
 from user.api.permissions import IsAdminOrReadOnly
 from user.api.serializers import UserSerializer
+from user.service import send
+from user.tasks import send_welcome_email
+
 
 
 class UserView(ListView):
@@ -66,6 +69,8 @@ class SignUpView(FormView):
 
     def form_valid(self, form):
         form.save()
+        # send(form.instance.email)
+        send_welcome_email.delay(form.instance.email)
         return super().form_valid(form)
 
 
