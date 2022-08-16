@@ -8,7 +8,7 @@ You can find many interesting articles about fruits!
 You can buy fruits!
  
 Best regards,
-Fruits Shop Team
+Fruit Shop Team
 """
 
 
