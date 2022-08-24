@@ -1,8 +1,8 @@
 import os
 from celery import Celery
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Fruit_Shop.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fruit_shop.settings')
 
-app = Celery('Fruit_Shop')
+app = Celery('fruit_shop')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()

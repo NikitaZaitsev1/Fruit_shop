@@ -1,4 +1,4 @@
-from Fruit_Shop.celery import app
+from fruit_shop.celery import app
 
 from user.service import send
 
