@@ -71,7 +71,7 @@ class SignUpView(FormView):
 
     def form_valid(self, form):
         form.save()
-        # send_welcome_email.delay(form.instance.email)
+        send_welcome_email.delay(form.instance.email)
         return super().form_valid(form)
 
 
