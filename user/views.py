@@ -1,4 +1,7 @@
-from django.views.generic import ListView, TemplateView
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
+from django.views.generic import ListView, TemplateView, CreateView
 from django.shortcuts import render
 from django.views.generic import FormView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, RetrieveDestroyAPIView
@@ -6,9 +9,9 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 from order.models import Order
-from post.models import Post
-from user.forms import SignUpForm, LoginForm
-from django.urls import reverse
+from post.models import Post, Tag
+from user.forms import SignUpForm, LoginForm, AddTagForm
+from django.urls import reverse, reverse_lazy
 from django.shortcuts import redirect
 from django.contrib.auth import logout
 from user.models import User
@@ -16,7 +19,6 @@ from user.api.permissions import IsAdminOrReadOnly
 from user.api.serializers import UserSerializer
 from user.service import send
 from user.tasks import send_welcome_email
-
 
 
 class UserView(ListView):
@@ -69,14 +71,25 @@ class SignUpView(FormView):
 
     def form_valid(self, form):
         form.save()
-        # send(form.instance.email)
-        send_welcome_email.delay(form.instance.email)
+        # send_welcome_email.delay(form.instance.email)
+        return super().form_valid(form)
+
+
+class AddTagView(CreateView):
+    model = Tag
+    form_class = AddTagForm
+    template_name = 'add_tag.html'
+
+    def get_success_url(self):
+        return reverse_lazy('user_page')
+
+    def form_valid(self, form):
         return super().form_valid(form)
 
 
 def log_out(request):
     logout(request)
-    return redirect(reverse("login_page"))
+    return redirect(reverse("home_page"))
 
 
 """API VIEWS"""

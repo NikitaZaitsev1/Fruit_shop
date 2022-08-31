@@ -6,16 +6,14 @@
 {% endblock hero_area %}
 
 {% block content %}
-
 <section class="fruit_section">
     <div class="container">
-        <h2 class="custom_heading">Contact Us</h2>
+        <h2 class="custom_heading">Add new tag</h2>
         <div class="row layout_padding2">
             <div class="col-md-8">
                 <div class="fruit_detail-box">
                     <div class="form-group">
-                 <form method="post" autocomplete="off"
-                              enctype="multipart/form-data" style=" width: 50vw; margin-left : 9vw;">
+                        <form method="post" autocomplete="off" style=" width: 50vw; margin-left : 7vw;">
                             {% csrf_token %}
                             {% for field in form %}
                             <div class="form-group">
@@ -24,12 +22,11 @@
                                     {{ field.errors }}
                                 </div>
                                 {% endif %}
-                                {{ field.label }}
                                 {{ field }}
                             </div>
                             {% endfor %}
                             <button type="submit" name="buttom" class="btn btn-dark" style="color: orange">
-                               Send
+                                Add tag
                             </button>
                         </form>
                     </div>
@@ -41,10 +38,11 @@
 
 {% endblock content %}
 
+
 {% block footer %}
 <style>
     footer {
-        margin-top: 90px;
+        margin-top: 375px;
         /*Минус Высота футера*/
         height: 100px;
         /*Высота футера*/
@@ -54,3 +52,4 @@
 {% include "base_parts/footer.html" %}
 </footer>
 {% endblock footer %}
+

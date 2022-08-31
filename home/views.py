@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render, get_object_or_404
-from django.urls import reverse
-from django.views.generic import TemplateView, ListView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import TemplateView, ListView, FormView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, RetrieveDestroyAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
@@ -34,19 +34,18 @@ class AboutView(TemplateView):
     template_name = "about.html"
 
 
-def contacts_view(request):
-    form = FeedBackForm()
-    if request.method == "POST":
-        form = FeedBackForm(request.POST)
-        if form.is_valid():
-            form.save()
-        return redirect(reverse("contact_page"))
+class ContactFormView(FormView):
+    template_name = 'contact.html'
+    form_class = FeedBackForm
+    success_url = reverse_lazy('feedback_page')
 
-    context = {
-        "feedback_form": form,
-        "field_name": ["Full Name", "Email", "Phone", "Message"]
-    }
-    return render(request, "contact.html", context)
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+
+class FeedBackView(TemplateView):
+    template_name = "feedback_success.html"
 
 
 """API VIEWS"""

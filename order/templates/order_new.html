@@ -10,6 +10,9 @@
 <section class="fruit_section">
     <div class="container">
         <h2 class="custom_heading">Order processing</h2>
+        <p style="margin-left: 366px">
+            Payments made to the courier delivered the goods.
+        </p>
         <div class="row layout_padding2">
             <div class="col-md-8">
                 <div class="fruit_detail-box">
@@ -17,7 +20,7 @@
                         <form  method="post" autocomplete="off"
                               enctype="multipart/form-data" style=" width: 50vw; margin-left : 7vw;">
                             {% csrf_token %}
-                            {% for field in order_form %}
+                            {% for field in form %}
                             <div class="form-group">
                                 {% if field.errors %}
                                 <div class="alert alert-danger">
@@ -44,7 +47,7 @@
 {% block footer %}
 <style>
     footer {
-        margin-top: 160px;
+        margin-top: 180px;
         height: 100px;
     }
 

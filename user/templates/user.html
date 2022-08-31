@@ -26,11 +26,17 @@
             <p><a href="{% url 'post_new_page' %}" style="color: orangered">
                 Add post
             </a></p>
+            <p><a href="{% url 'tag_new_page' %}" style="color: orangered">
+                Add tag
+            </a></p>
             <p><a href="{% url 'api_doc_page' %}" style="color: orangered">
                 API documentation</a></p>
             {% else %}
             <p><a href="{% url 'post_new_page' %}" style="color: orangered">
                 Add post</a></p>
+            <p><a href="{% url 'tag_new_page' %}" style="color: orangered">
+                Add tag
+            </a></p>
             <p><a href="{% url 'api_doc_page' %}" style="color: orangered">
                 API documentation</a></p>
             {% endif %}

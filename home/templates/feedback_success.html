@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block hero_area %}
+{% include "base_parts/nav.html" %}
+{% endblock hero_area %}
+
+{% block content %}
+
+<section class="fruit_section">
+    <div class="container" style="margin-top: 80px">
+        <h2 class="custom_heading">We have received your message and we will be calling or emailing you shortly!</h2>
+    </div>
+</section>
+
+{% endblock content %}
+
+{% block footer %}
+<style>
+    footer {
+        margin-top: 480px;
+        /*Минус Высота футера*/
+        height: 100px;
+        /*Высота футера*/
+    }
+</style>
+<footer>
+{% include "base_parts/footer.html" %}
+</footer>
+{% endblock footer %}

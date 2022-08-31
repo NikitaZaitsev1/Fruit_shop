@@ -1,16 +1,20 @@
 from django import forms
+
+from post.models import Tag
 from user.models import User
 from django.contrib.auth import login, authenticate
+from phonenumber_field.formfields import PhoneNumberField
 
 
 class SignUpForm(forms.ModelForm):
     password_repeat = forms.CharField(widget=forms.PasswordInput())
+    phone = PhoneNumberField(widget=forms.TextInput())
     _sys_users = ("admin", "administrator", "sys", "superuser")
 
     class Meta:
         model = User
         fields = ("username", "phone", "email", "password")
-        widgets = {"password": forms.PasswordInput()}
+        widgets = {"password": forms.PasswordInput(), "phone": forms.TextInput()}
 
     def clean(self):
         is_errors = False
@@ -42,3 +46,12 @@ class LoginForm(forms.Form):
 
     def auth(self, request):
         login(request, self.user)
+
+
+class AddTagForm(forms.ModelForm):
+    class Meta:
+        model = Tag
+        fields = ('name',)
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+        }

@@ -19,7 +19,9 @@
                     {% for input in form %}
                     <div class="form-group">
                         <label for="{{ input.name }}" class="col-form-label">{{ input.label }}</label>
-                        {{ input }}
+                        <p>
+                            {{ input }}
+                        </p>
                         {% if input.errors %}
                         <ul>
                             {% for error in input.errors %}
@@ -45,9 +47,10 @@
         height: 100px;
 
     }
-        .signup {
-    margin-top: 40px;
-}
+
+    .signup {
+        margin-top: 40px;
+    }
 </style>
 
 

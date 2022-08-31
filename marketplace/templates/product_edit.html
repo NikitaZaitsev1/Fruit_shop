@@ -14,9 +14,10 @@
             <div class="col-md-8">
                 <div class="fruit_detail-box">
                     <div class="form-group">
-                        <form  method="post" autocomplete="off" enctype="multipart/form-data" style=" width: 50vw; margin-left : 9vw;">
+                        <form method="post" autocomplete="off" enctype="multipart/form-data"
+                              style=" width: 50vw; margin-left : 9vw;">
                             {% csrf_token %}
-                            {% for field in product_form %}
+                            {% for field in form %}
                             <div class="form-group">
                                 {% if field.errors %}
                                 <div class="alert alert-danger">
@@ -41,6 +42,19 @@
 
 
 {% block footer %}
+
+<style>
+    footer {
+        margin-top: 100px;
+        height: 100px;
+    }
+
+    .login {
+        margin-top: 40px;
+    }
+</style>
+
+
 <footer>
     {% include "base_parts/footer.html" %}
 </footer>

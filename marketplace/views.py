@@ -1,8 +1,9 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils import timezone
-from django.views.generic import ListView, DetailView, DeleteView
+from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, RetrieveDestroyAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
@@ -52,33 +53,27 @@ def cat_detail_view(request, pk):
     })
 
 
-def product_new_view(request):
-    if request.method == "POST":
-        form = ProductForm(request.POST, request.FILES)
-        if form.is_valid():
-            product = form.save(commit=False)
-            product.seller = request.user
-            product.published_date = timezone.now()
-            product.save()
-            return redirect('product_detail_page', pk=product.pk)
-    else:
-        product_form = ProductForm()
-        return render(request, 'product_new.html', {'product_form': product_form})
+class AddProductView(LoginRequiredMixin, CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'product_new.html'
+
+    def get_success_url(self):
+        return reverse_lazy('product_detail_page', kwargs={'pk': self.object.pk})
+
+    def form_valid(self, form):
+        form.instance.seller = self.request.user
+        form.instance.published_date = timezone.now()
+        return super().form_valid(form)
 
 
-def product_edit_view(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    if request.method == "POST":
-        form = ProductForm(request.POST, request.FILES, instance=product)
-        if form.is_valid():
-            product = form.save(commit=False)
-            product.seller = request.user
-            product.published_date = timezone.now()
-            product.save()
-            return redirect('product_detail_page', pk=product.pk)
-    else:
-        form = ProductForm(instance=product)
-    return render(request, 'product_edit.html', {'product_form': form})
+class EditProductView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'product_edit.html'
+
+    def get_success_url(self):
+        return reverse_lazy('product_detail_page', kwargs={'pk': self.object.pk})
 
 
 """API VIEWS"""

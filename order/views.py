@@ -1,6 +1,8 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views.generic import DetailView
+from django.views.generic import DetailView, CreateView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, RetrieveDestroyAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
@@ -18,42 +20,18 @@ class OrderDetailView(DetailView):
     context_object_name = 'order'
 
 
+class AddOrderView(LoginRequiredMixin, CreateView):
+    model = Order
+    form_class = OrderForm
+    template_name = 'order_new.html'
 
+    def get_success_url(self):
+        return reverse_lazy('order_detail_page', kwargs={'pk': self.object.pk})
 
-# def order_new_view(request):
-#     if request.method == "POST":
-#         form = OrderForm(request.POST)
-#         if form.is_valid():
-#             order = form.save(commit=False)
-#             order.customer = request.user
-#             order.published_date = timezone.now()
-#
-#             #TODO: delete
-#             # order_products = Product.objects.filter(order=pk)
-#             # for item in order_products:
-#             #     Order.objects.create(order=order,
-#             #                          product=item.name,
-#             #                          price=item.price,
-#             #                          )
-#
-#             order.save()
-#             return redirect('order_detail_page', pk=order.pk)
-#     else:
-#         order_form = OrderForm()
-#         return render(request, 'order_new.html', {'order_form': order_form})
-
-def order_new_view(request):
-    if request.method == "POST":
-        form = OrderForm(request.POST)
-        if form.is_valid():
-            order = form.save(commit=False)
-            order.customer = request.user
-            order.published_date = timezone.now()
-            order.save()
-            return redirect('order_detail_page', pk=order.pk)
-    else:
-        order_form = OrderForm()
-        return render(request, 'order_new.html', {'order_form': order_form})
+    def form_valid(self, form):
+        form.instance.customer = self.request.user
+        form.instance.published_date = timezone.now()
+        return super().form_valid(form)
 
 
 """API VIEWS"""
