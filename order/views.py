@@ -20,7 +20,7 @@ class OrderDetailView(DetailView):
     context_object_name = 'order'
 
 
-class AddOrderView(LoginRequiredMixin, CreateView):
+class AddOrderView(CreateView):
     model = Order
     form_class = OrderForm
     template_name = 'order_new.html'
@@ -53,7 +53,6 @@ class OrderApiUpdate(RetrieveUpdateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     permission_classes = (IsAuthenticated,)
-    # authentication_classes = (TokenAuthentication,)
     pagination_class = OrderAPIListPagination
 
 

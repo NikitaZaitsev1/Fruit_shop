@@ -33,7 +33,7 @@ class TagDetailView(DetailView):
     context_object_name = 'tag'
 
 
-class AddPostView(LoginRequiredMixin, CreateView):
+class AddPostView(CreateView):
     model = Post
     form_class = PostForm
     template_name = 'post_new.html'

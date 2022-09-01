@@ -110,7 +110,6 @@ class UserApiUpdate(RetrieveUpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
-    # authentication_classes = (TokenAuthentication,)
     pagination_class = UserAPIListPagination
 
 

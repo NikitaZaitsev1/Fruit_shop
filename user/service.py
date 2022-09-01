@@ -1,11 +1,7 @@
 from django.core.mail import send_mail
 
-subject = 'Welcome to the Fruits Shop!'
-message = """You was registrated in Fruits Shop!
- 
-Please login and enjoy!
-You can find many interesting articles about fruits!
-You can buy fruits!
+subject = 'Welcome to the Fruit Shop!'
+message = """You was registrated in Fruit Shop!
  
 Best regards,
 Fruit Shop Team
